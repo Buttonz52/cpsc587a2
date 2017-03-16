@@ -51,15 +51,15 @@ void Particle::generateBuffer(GLuint &vertexArray)
 	float r = 0.5;
 
 	verts.push_back(vec3(-r, r, r));	//1
-	verts.push_back(vec3(r, r, r));	//2
+	verts.push_back(vec3(r, r, r));		//2
 	verts.push_back(vec3(-r, -r, r));	//3
-	verts.push_back(vec3(-r, -r, r));	//4
+	verts.push_back(vec3( r, -r, r));	//4
 	verts.push_back(vec3(-r, -r, -r));	//5
 	verts.push_back(vec3(r, -r, -r));	//6
 	verts.push_back(vec3(-r, r, -r));	//7
 	verts.push_back(vec3(r, r, -r));	//8
 	verts.push_back(vec3(-r, r, r));	//9
-	verts.push_back(vec3(r, r, r));	//10
+	verts.push_back(vec3(r, r, r));		//10
 	verts.push_back(vec3(r, -r, r));	//11
 	verts.push_back(vec3(r, r, -r));	//12
 	verts.push_back(vec3(r, -r, -r));	//13
@@ -82,15 +82,13 @@ void Particle::render(mat4 projection, mat4 view)
 	glBindVertexArray(vertexArray);
 	glUseProgram(program);
 
-	//vec4 pos = projection * modelview * vec4(position,1);
 	mat4 model = mat4(1);
 	model[3] = vec4(position, 1.0);
 	mat4 MVP = projection * view * model;
 
-	//glUniform4fv(glGetUniformLocation(program, "position"), 1, value_ptr(MVP));
 	glUniformMatrix4fv(glGetUniformLocation(program, "MVP"), 1, GL_FALSE, value_ptr(MVP));
 
-	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+	glDrawArrays(GL_TRIANGLE_STRIP, 0, 17);
 
 	glBindVertexArray(0);
 }

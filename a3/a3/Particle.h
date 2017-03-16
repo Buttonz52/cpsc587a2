@@ -26,7 +26,6 @@ public:
 	void render(mat4 projection, mat4 view);
 	void getCube(vector<vec3> verts, float r);
 
-
 private:
 
 };

@@ -48,15 +48,17 @@ int main()
 		glClearBufferfv(GL_COLOR, 0, clearColor);
 
 		//update objects
-		simulate(springs, particles, curr_t, delta_t);
+		simulate(springs, particles);
 
 		//update camera
 		projection = camera.calculateProjectionMatrix();
 		view = camera.calculateViewMatrix();
 
 		//draw objects
-		//for(int i = 0; i < particles.size(); i++)
-			particles[0]->render(projection, view);
+		for(int i = 0; i < particles.size(); i++)
+			particles[i]->render(projection, view);
+		for (int i = 0; i < springs.size(); i++)
+			springs[i]->render(projection, view);
 
 		//time step
 		curr_t += delta_t;
@@ -75,35 +77,23 @@ int main()
 void setupScene()
 {
 	Particle* p1 = new Particle(vec3(0,1,0));	
-	Particle* p2 = new Particle(vec3(0,0,0));	
+	Particle* p2 = new Particle(vec3(0,-1,0));	
 	particles.push_back(p1);
 	particles.push_back(p2);
 
-	Spring* s1 = new Spring();
+	Spring* s1 = new Spring(p1,p2);
 	springs.push_back(s1);
-	connectSprings(springs, particles);
 }
 
-void simulate(vector<Spring*> s, vector<Particle*> p, float curr_t, float delta_t)
+void simulate(vector<Spring*> s, vector<Particle*> p)
 {
 	if (p.size() < 2)
 		cout << "There are no springs in the spring sytem";
 
-	//change position for each s[i] and p[i]
-	p[0]->position -= vec3(0, -0.1, 0);
+	//for each spring update the forces for each particle
+	//for each particle move the particle appropriatly
 	
 	
-}
-
-void connectSprings(vector<Spring*> s, vector<Particle*> p)
-{
-	for (int i = 0; i < s.size(); i++)
-	{
-		s[i]->a = *p[i];
-		s[i]->b = *p[i + 1];
-		s[i]->len = (s[i]->b.position - s[i]->a.position).length();	//fix me
-	}
-
 }
 
 void printOpenGLVersion()

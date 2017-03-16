@@ -11,8 +11,6 @@
 #include <vector>
 
 #define PI 3.14159265359f
-#define twoPI 2.f * PI
-#define halfPI 0.5f * PI
 #define gravity 9.81f
 
 #define defaultZoom 8.f
@@ -59,7 +57,5 @@ void motion(GLFWwindow* window, double x, double y);
 void printOpenGLVersion();
 
 void setupScene();
-void simulate(vector<Spring*> s, vector<Particle*> p, float curr_t, float delta_t);
+void simulate(vector<Spring*> s, vector<Particle*> p);
 void connectSprings(vector<Spring*> s, vector<Particle*> p);
-
-
