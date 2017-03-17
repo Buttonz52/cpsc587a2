@@ -22,10 +22,7 @@ int main()
 		exit(EXIT_FAILURE);
 	}
 	glfwSetErrorCallback(errorCallback);
-	glfwSetScrollCallback(window, scroll);
 	glfwSetKeyCallback(window, keyCallback);
-	glfwSetWindowSizeCallback(window, window_size_callback);
-	glfwSetCursorPosCallback(window, motion);
 	glfwMakeContextCurrent(window);
 
 	if (!gladLoadGL())
@@ -37,10 +34,6 @@ int main()
 
 	setupScene();
 
-	camera.setInitValues();
-	mat4 projection = camera.calculateProjectionMatrix();
-	mat4 view = camera.calculateViewMatrix();
-
 	while (!glfwWindowShouldClose(window))
 	{
 		glEnable(GL_DEPTH_TEST);
@@ -50,15 +43,15 @@ int main()
 		//update objects
 		simulate(springs, particles);
 
-		//update camera
-		projection = camera.calculateProjectionMatrix();
-		view = camera.calculateViewMatrix();
+		//update 
+
 
 		//draw objects
 		for(int i = 0; i < particles.size(); i++)
-			particles[i]->render(projection, view);
+			particles[i]->render();
+
 		for (int i = 0; i < springs.size(); i++)
-			springs[i]->render(projection, view);
+			springs[i]->render();
 
 		//time step
 		curr_t += delta_t;
@@ -76,8 +69,8 @@ int main()
 
 void setupScene()
 {
-	Particle* p1 = new Particle(vec3(0,1,0));	
-	Particle* p2 = new Particle(vec3(0,-1,0));	
+	Particle* p1 = new Particle(vec3(0,0,0));	
+	Particle* p2 = new Particle(vec3(0,-0.1,0));	
 	particles.push_back(p1);
 	particles.push_back(p2);
 
@@ -112,44 +105,8 @@ void errorCallback(int error, const char* description)
 	std::cout << "GLFW ERROR " << error << ": " << description << std::endl;
 }
 
-void scroll(GLFWwindow* window, double x, double y)
-{
-	camera.incrementRadius(y * 2.0);
-}
-
 void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, GL_TRUE);
-}
-
-void window_size_callback(GLFWwindow* window, int width, int height)
-{
-	int vp[4];
-	glGetIntegerv(GL_VIEWPORT, vp);
-
-	glViewport(0, 0, width, height);
-
-	float minDim = float(min(width, height));
-
-	winRatio[0][0] = minDim / float(width);
-
-	camera.setAsp((float)width / (float)height);
-}
-
-void motion(GLFWwindow* w, double x, double y)
-{
-
-	double dx, dy;
-	dx = (x - mouse_old_x);
-	dy = (y - mouse_old_y);
-
-	if (glfwGetMouseButton(w, GLFW_MOUSE_BUTTON_1))
-	{
-		camera.incrementAzu(dx * 0.005f);
-		camera.incrementAlt(dy * 0.005f);
-	}
-
-	mouse_old_x = x;
-	mouse_old_y = y;
 }

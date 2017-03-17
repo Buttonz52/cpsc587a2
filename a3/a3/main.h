@@ -1,4 +1,3 @@
-#include "Camera.h"
 #include "Particle.h"
 #include "Spring.h"
 #include "Shader.h"
@@ -34,13 +33,6 @@ rotate_y = 0.0,
 zoom = 5.f,
 aspectRatio = (float)WINDOW_WIDTH / (float)WINDOW_HEIGHT;
 
-glm::vec3 up(0.f, 1.f, 0.f),
-cam(0.f, 0.2f, 2.f),
-center(0.f, 0.f, 0.f);
-
-//
-Camera camera;
-
 //Simulation
 float delta_t = 0.01;
 float curr_t = 0.00;
@@ -50,10 +42,7 @@ vector<Spring*> springs;
 
 //functions
 void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
-void scroll(GLFWwindow* window, double x, double y);
 void errorCallback(int error, const char* description);
-void window_size_callback(GLFWwindow* window, int width, int height);
-void motion(GLFWwindow* window, double x, double y);
 void printOpenGLVersion();
 
 void setupScene();

@@ -1,12 +1,11 @@
-﻿Build started 3/16/2017 4:21:04 PM.
+﻿Build started 3/17/2017 2:00:18 PM.
      1>Project "C:\Users\Radiance\Desktop\assign3\a3\a3\a3.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /I"C:\Users\Radiance\Desktop\assign3\a3\a3\..\middleware\GLAD V4.5\include" /I"C:\Users\Radiance\Desktop\assign3\a3\a3\..\middleware\GLFW x32\include" /IC:\Users\Radiance\Desktop\assign3\a3\a3\..\middleware\GLM /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt Spring.cpp
          Spring.cpp
      1>c:\users\radiance\desktop\assign3\a3\a3\spring.cpp(10): warning C4244: '=': conversion from 'glm::tvec3<float,0>::length_type' to 'float', possible loss of data
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Radiance\Desktop\assign3\a3\Debug\a3.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Users\Radiance\Desktop\assign3\a3\a3\..\middleware\GLFW x32\lib-vc2015" opengl32.lib glfw3.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG:FASTLINK /PDB:"C:\Users\Radiance\Desktop\assign3\a3\Debug\a3.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Radiance\Desktop\assign3\a3\Debug\a3.lib" /MACHINE:X86 Debug\Camera.obj
-         Debug\glad.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Radiance\Desktop\assign3\a3\Debug\a3.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Users\Radiance\Desktop\assign3\a3\a3\..\middleware\GLFW x32\lib-vc2015" opengl32.lib glfw3.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG:FASTLINK /PDB:"C:\Users\Radiance\Desktop\assign3\a3\Debug\a3.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Radiance\Desktop\assign3\a3\Debug\a3.lib" /MACHINE:X86 Debug\glad.obj
          Debug\main.obj
          Debug\Particle.obj
          Debug\Shader.obj
@@ -16,4 +15,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:01.28
+Time Elapsed 00:00:01.15
