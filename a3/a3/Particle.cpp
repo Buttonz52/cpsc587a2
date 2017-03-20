@@ -1,13 +1,14 @@
 #include "Particle.h"
 #include "Shader.h"
 
-Particle::Particle(vec3 pos)
+Particle::Particle(vec3 pos, bool anchored)
 {
 	position = pos;
 	vertexArray = 0;
 	vertexBuffer = 0;
 	program = generateProgram("general.vert", "general.frag");
 	generateBuffer();
+	isAnchored = anchored;
 }
 
 void Particle::generateBuffer()

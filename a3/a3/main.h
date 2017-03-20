@@ -20,19 +20,6 @@
 using namespace glm;
 using namespace std;
 
-//variables
-const glm::mat4 ident(1.0f);
-const GLfloat clearColor[] = { 0.f, 0.f, 0.f };
-mat4 winRatio = mat4(1.f);
-
-double  mouse_old_x,
-mouse_old_y;
-
-float   rotate_x = 0.0,
-rotate_y = 0.0,
-zoom = 5.f,
-aspectRatio = (float)WINDOW_WIDTH / (float)WINDOW_HEIGHT;
-
 //Simulation
 float delta_t = 0.01;
 float curr_t = 0.00;
@@ -46,5 +33,5 @@ void errorCallback(int error, const char* description);
 void printOpenGLVersion();
 
 void setupScene();
-void simulate(vector<Spring*> s, vector<Particle*> p);
-void connectSprings(vector<Spring*> s, vector<Particle*> p);
+void simulate();
+void connectSprings();

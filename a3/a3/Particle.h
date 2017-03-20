@@ -10,8 +10,9 @@ using namespace std;
 class Particle
 {
 public:
-	Particle(vec3 pos);
+	Particle(vec3 pos, bool anchored);
 
+	bool isAnchored;
 	vec3 force = vec3(0);
 	vec3 velocity = vec3(0);
 	vec3 position = vec3(0);

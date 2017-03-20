@@ -38,16 +38,19 @@ int main()
 	{
 		glEnable(GL_DEPTH_TEST);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		glClearBufferfv(GL_COLOR, 0, clearColor);
+		glClearColor(0.3, 0.3, 0.3, 1.0);
 
 		//update objects
-		simulate(springs, particles);
+		simulate();
 
 		//update 
-
+		for (int i = 0; i < particles.size(); i++)
+			particles[i]->update();
+		for (int i = 0; i < springs.size(); i++)
+			springs[i]->update();
 
 		//draw objects
-		for(int i = 0; i < particles.size(); i++)
+		for (int i = 0; i < particles.size(); i++)
 			particles[i]->render();
 
 		for (int i = 0; i < springs.size(); i++)
@@ -69,8 +72,8 @@ int main()
 
 void setupScene()
 {
-	Particle* p1 = new Particle(vec3(0,0,0));	
-	Particle* p2 = new Particle(vec3(0,-0.1,0));	
+	Particle* p1 = new Particle(vec3(0,0.5,0), true);	
+	Particle* p2 = new Particle(vec3(0,-0.5,0), false);	
 	particles.push_back(p1);
 	particles.push_back(p2);
 
@@ -78,15 +81,37 @@ void setupScene()
 	springs.push_back(s1);
 }
 
-void simulate(vector<Spring*> s, vector<Particle*> p)
+void simulate()
 {
-	if (p.size() < 2)
+	if (particles.size() < 2)
 		cout << "There are no springs in the spring sytem";
 
 	//for each spring update the forces for each particle
+	for (int i = 0; i < springs.size(); i++)
+	{
+		float k = springs[i]->stiffness;
+		float b = springs[i]->dampening;
+		vec3 xi = springs[i]->a->position;
+		vec3 xi1 = springs[i]->b->position;
+		vec3 vi = springs[i]->a->velocity;
+		vec3 vi1 = springs[i]->b->velocity;
+		vec3 f = -k * (xi - xi1) - b * (vi - vi1);
+
+		springs[i]->a->force = f;
+		springs[i]->b->force = -f;
+	}
+		
 	//for each particle move the particle appropriatly
-	
-	
+	for (int i = 0; i < particles.size(); i++)
+	{
+		if (particles[i]->isAnchored)
+		{
+			particles[i]->velocity += delta_t*(particles[i]->force) / (particles[i]->mass);
+			particles[i]->position += particles[i]->velocity;
+			particles[i]->force = vec3(0, 0, 0);
+		}
+	}	
+	curr_t += delta_t;
 }
 
 void printOpenGLVersion()
