@@ -8,8 +8,8 @@ public:
 	Particle *a;						//Particle a
 	Particle *b;						//Particle b
 	float len;						//Spring length
-	float stiffness = 100.0;		//Spring Stiffness
-	float dampening = 1.0;			//Spring Dampening	
+	float stiffness = 40.0;		//Spring Stiffness
+	float dampening = 100.0;			//Spring Dampening	
 	vector<vec3> verts;
 
 	GLuint vertexArray;

@@ -1,9 +1,10 @@
 #include "Particle.h"
 #include "Shader.h"
 
-Particle::Particle(vec3 pos, bool anchored)
+Particle::Particle(vec3 pos, float m, bool anchored)
 {
 	position = pos;
+	mass = m;
 	vertexArray = 0;
 	vertexBuffer = 0;
 	program = generateProgram("general.vert", "general.frag");

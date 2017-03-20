@@ -10,7 +10,7 @@
 #include <vector>
 
 #define PI 3.14159265359f
-#define gravity 9.81f
+#define GRAVITY vec3(0.f, 9.81, 0.f)
 
 #define defaultZoom 8.f
 
@@ -20,12 +20,14 @@
 using namespace glm;
 using namespace std;
 
+//Scene
+int scene = 1;				// Scenes 1,2,3,4
+
 //Simulation
 float delta_t = 0.01;
 float curr_t = 0.00;
 vector<Particle*> particles;
 vector<Spring*> springs;
-
 
 //functions
 void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);

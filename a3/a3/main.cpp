@@ -40,10 +40,10 @@ int main()
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glClearColor(0.3, 0.3, 0.3, 1.0);
 
-		//update objects
+		//update spring/mass system
 		simulate();
 
-		//update 
+		//update vertex positions
 		for (int i = 0; i < particles.size(); i++)
 			particles[i]->update();
 		for (int i = 0; i < springs.size(); i++)
@@ -72,13 +72,31 @@ int main()
 
 void setupScene()
 {
-	Particle* p1 = new Particle(vec3(0,0.5,0), true);	
-	Particle* p2 = new Particle(vec3(0,-0.5,0), false);	
-	particles.push_back(p1);
-	particles.push_back(p2);
+	if (scene == 1)
+	{
+		Particle* p1 = new Particle(vec3(0, 0, 0), 200.0, true);
+		Particle* p2 = new Particle(vec3(0, -0.5, 0), 200.0, false);
+		particles.push_back(p1);
+		particles.push_back(p2);
 
-	Spring* s1 = new Spring(p1,p2);
-	springs.push_back(s1);
+		Spring* s1 = new Spring(p1, p2);
+		springs.push_back(s1);
+	}
+	if (scene == 2)
+	{
+		Particle* p1 = new Particle(vec3(0, 0.5, 0), 200.0, true);
+		Particle* p2 = new Particle(vec3(0.1, 0.2, 0), 200.0, false);
+		Particle* p3 = new Particle(vec3(-0.5, -0.5, 0), 200.0, false);
+		particles.push_back(p1);
+		particles.push_back(p2);
+		particles.push_back(p3);
+
+		Spring* s1 = new Spring(p1, p2);
+		Spring* s2 = new Spring(p2, p3);
+		springs.push_back(s1);
+		springs.push_back(s2);
+	}
+
 }
 
 void simulate()
@@ -95,7 +113,7 @@ void simulate()
 		vec3 xi1 = springs[i]->b->position;
 		vec3 vi = springs[i]->a->velocity;
 		vec3 vi1 = springs[i]->b->velocity;
-		vec3 f = -k * (xi - xi1) - b * (vi - vi1);
+		vec3 f = -k * (xi - xi1) -b * (vi - vi1) + GRAVITY;
 
 		springs[i]->a->force = f;
 		springs[i]->b->force = -f;
@@ -104,7 +122,7 @@ void simulate()
 	//for each particle move the particle appropriatly
 	for (int i = 0; i < particles.size(); i++)
 	{
-		if (particles[i]->isAnchored)
+		if (!particles[i]->isAnchored)
 		{
 			particles[i]->velocity += delta_t*(particles[i]->force) / (particles[i]->mass);
 			particles[i]->position += particles[i]->velocity;
@@ -134,4 +152,32 @@ void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods
 {
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, GL_TRUE);
+	if (key == GLFW_KEY_1 && action == GLFW_PRESS)
+	{
+		scene = 1;
+		particles.clear();
+		springs.clear();
+		setupScene();
+	}
+	if (key == GLFW_KEY_2 && action == GLFW_PRESS)
+	{
+		scene = 2;
+		particles.clear();
+		springs.clear();
+		setupScene();
+	}
+	if (key == GLFW_KEY_3 && action == GLFW_PRESS)
+	{
+		scene = 3;
+		particles.clear();
+		springs.clear();
+		setupScene();
+	}
+	if (key == GLFW_KEY_4 && action == GLFW_PRESS)
+	{
+		scene = 4;
+		particles.clear();
+		springs.clear();
+		setupScene();
+	}
 }
