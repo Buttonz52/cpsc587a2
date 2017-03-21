@@ -1,17 +1,37 @@
-﻿  main.cpp
-\\cs-fs01\profiles\ug\bzpetras\desktop\cpsc587\a3\a3\main.h(28): warning C4305: 'initializing': truncation from 'double' to 'float'
-\\cs-fs01\profiles\ug\bzpetras\desktop\cpsc587\a3\a3\main.cpp(41): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-\\cs-fs01\profiles\ug\bzpetras\desktop\cpsc587\a3\a3\main.cpp(47): warning C4018: '<': signed/unsigned mismatch
-\\cs-fs01\profiles\ug\bzpetras\desktop\cpsc587\a3\a3\main.cpp(49): warning C4018: '<': signed/unsigned mismatch
-\\cs-fs01\profiles\ug\bzpetras\desktop\cpsc587\a3\a3\main.cpp(53): warning C4018: '<': signed/unsigned mismatch
-\\cs-fs01\profiles\ug\bzpetras\desktop\cpsc587\a3\a3\main.cpp(56): warning C4018: '<': signed/unsigned mismatch
-\\cs-fs01\profiles\ug\bzpetras\desktop\cpsc587\a3\a3\main.cpp(85): warning C4305: 'argument': truncation from 'double' to 'float'
-\\cs-fs01\profiles\ug\bzpetras\desktop\cpsc587\a3\a3\main.cpp(97): warning C4305: 'argument': truncation from 'double' to 'float'
-\\cs-fs01\profiles\ug\bzpetras\desktop\cpsc587\a3\a3\main.cpp(98): warning C4305: 'argument': truncation from 'double' to 'float'
-\\cs-fs01\profiles\ug\bzpetras\desktop\cpsc587\a3\a3\main.cpp(116): warning C4018: '<': signed/unsigned mismatch
-\\cs-fs01\profiles\ug\bzpetras\desktop\cpsc587\a3\a3\main.cpp(120): warning C4305: 'argument': truncation from 'double' to 'float'
-\\cs-fs01\profiles\ug\bzpetras\desktop\cpsc587\a3\a3\main.cpp(125): warning C4305: 'argument': truncation from 'double' to 'float'
-\\cs-fs01\profiles\ug\bzpetras\desktop\cpsc587\a3\a3\main.cpp(144): warning C4018: '<': signed/unsigned mismatch
-\\cs-fs01\profiles\ug\bzpetras\desktop\cpsc587\a3\a3\main.cpp(160): warning C4018: '<': signed/unsigned mismatch
-  a3.vcxproj -> \\cs-fs01\Profiles\ug\bzpetras\Desktop\CPSC587\a3\Debug\a3.exe
-  a3.vcxproj -> \\cs-fs01\Profiles\ug\bzpetras\Desktop\CPSC587\a3\Debug\a3.pdb (Partial PDB)
+﻿Build started 3/21/2017 3:38:43 PM.
+     1>Project "C:\Users\Radiance\Desktop\assign3\a3\a3\a3.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /I"C:\Users\Radiance\Desktop\assign3\a3\a3\..\middleware\GLAD V4.5\include" /I"C:\Users\Radiance\Desktop\assign3\a3\a3\..\middleware\GLFW x32\include" /IC:\Users\Radiance\Desktop\assign3\a3\a3\..\middleware\GLM /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp
+         main.cpp
+     1>c:\users\radiance\desktop\assign3\a3\a3\main.h(32): warning C4305: 'initializing': truncation from 'double' to 'float'
+     1>c:\users\radiance\desktop\assign3\a3\a3\main.h(35): warning C4305: 'initializing': truncation from 'double' to 'float'
+     1>c:\users\radiance\desktop\assign3\a3\a3\main.cpp(44): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+     1>c:\users\radiance\desktop\assign3\a3\a3\main.cpp(50): warning C4018: '<': signed/unsigned mismatch
+     1>c:\users\radiance\desktop\assign3\a3\a3\main.cpp(52): warning C4018: '<': signed/unsigned mismatch
+     1>c:\users\radiance\desktop\assign3\a3\a3\main.cpp(56): warning C4018: '<': signed/unsigned mismatch
+     1>c:\users\radiance\desktop\assign3\a3\a3\main.cpp(59): warning C4018: '<': signed/unsigned mismatch
+     1>c:\users\radiance\desktop\assign3\a3\a3\main.cpp(88): warning C4305: 'argument': truncation from 'double' to 'float'
+     1>c:\users\radiance\desktop\assign3\a3\a3\main.cpp(100): warning C4305: 'argument': truncation from 'double' to 'float'
+     1>c:\users\radiance\desktop\assign3\a3\a3\main.cpp(101): warning C4305: 'argument': truncation from 'double' to 'float'
+     1>c:\users\radiance\desktop\assign3\a3\a3\main.cpp(135): warning C4018: '<': signed/unsigned mismatch
+     1>c:\users\radiance\desktop\assign3\a3\a3\main.cpp(151): warning C4018: '<': signed/unsigned mismatch
+     1>c:\users\radiance\desktop\assign3\a3\a3\main.cpp(175): warning C4018: '<': signed/unsigned mismatch
+     1>c:\users\radiance\desktop\assign3\a3\a3\main.cpp(177): warning C4018: '<': signed/unsigned mismatch
+     1>c:\users\radiance\desktop\assign3\a3\a3\main.cpp(262): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+     1>c:\users\radiance\desktop\assign3\a3\a3\main.cpp(263): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+     1>c:\users\radiance\desktop\assign3\a3\a3\main.cpp(274): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+     1>c:\users\radiance\desktop\assign3\a3\a3\main.cpp(276): warning C4305: '=': truncation from 'double' to 'float'
+     1>c:\users\radiance\desktop\assign3\a3\a3\main.cpp(277): warning C4244: 'argument': conversion from 'float' to 'GLsizei', possible loss of data
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Radiance\Desktop\assign3\a3\Debug\a3.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Users\Radiance\Desktop\assign3\a3\a3\..\middleware\GLFW x32\lib-vc2015" opengl32.lib glfw3.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG:FASTLINK /PDB:"C:\Users\Radiance\Desktop\assign3\a3\Debug\a3.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Radiance\Desktop\assign3\a3\Debug\a3.lib" /MACHINE:X86 Debug\glad.obj
+         Debug\main.obj
+         Debug\Particle.obj
+         Debug\Shader.obj
+         Debug\Spring.obj
+     1>LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
+         a3.vcxproj -> C:\Users\Radiance\Desktop\assign3\a3\Debug\a3.exe
+     1>Done Building Project "C:\Users\Radiance\Desktop\assign3\a3\a3\a3.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:01.75

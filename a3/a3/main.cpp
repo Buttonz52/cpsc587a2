@@ -23,6 +23,9 @@ int main()
 	}
 	glfwSetErrorCallback(errorCallback);
 	glfwSetKeyCallback(window, keyCallback);
+	glfwSetMouseButtonCallback(window, mouse);
+	glfwSetCursorPosCallback(window, motion);
+	glfwSetScrollCallback(window, scroll);
 	glfwMakeContextCurrent(window);
 
 	if (!gladLoadGL())
@@ -107,11 +110,12 @@ void setupScene()
 			{
 				for (int k = 0; k < cubeSize; k++)
 				{
-					Particle* p = new Particle(vec3(i*d, j*d, k*d), 0.5, true);
+					Particle* p = new Particle(vec3(i*d, j*d, k*d), 0.5, false);
 					particles.push_back(p);
 				}
 			}
 		}
+		//particles[0]->isAnchored = true;
 
 		connectSprings3();
 
@@ -150,7 +154,10 @@ void simulate()
 		{
 			particles[i]->force += GRAVITY*particles[i]->mass;			//force of gravity
 			particles[i]->velocity += delta_t*(particles[i]->force) / (particles[i]->mass);
-			particles[i]->position += particles[i]->velocity;
+			if(particles[i]->position.y > -0.5)
+				particles[i]->position += particles[i]->velocity;
+			else {}
+
 			particles[i]->force = vec3(0, 0, 0);
 		}
 		else {
@@ -171,8 +178,13 @@ void connectSprings3()
 		{
 			Particle* x1 = particles[i];
 			Particle* x2 = particles[j];
+			float len = length(vec3(x2->position - x1->position));
 
-			//continue here ----------------------------------------------------------------------------------
+			if (!(x1->position == x2->position) && len < r)
+			{
+				Spring* s = new Spring(x1, x2, d);
+				springs.push_back(s);
+			}
 		}
 	}
 }
@@ -225,4 +237,41 @@ void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods
 		springs.clear();
 		setupScene();
 	}
+}
+
+void mouse(GLFWwindow* window, int button, int action, int mods)
+{
+	if (action == GLFW_PRESS)
+	{
+		double x, y;
+		glfwGetCursorPos(window, &x, &y);
+		mouse_old_x = x;
+		mouse_old_y = y;
+	}
+}
+
+void motion(GLFWwindow* w, double x, double y)
+{
+
+	double dx, dy;
+	dx = (x - mouse_old_x);
+	dy = (y - mouse_old_y);
+
+	if (glfwGetMouseButton(w, GLFW_MOUSE_BUTTON_1))
+	{
+		rotate_x += dy * 0.005f;
+		phi += dx * 0.005f;
+	}
+
+	mouse_old_x = x;
+	mouse_old_y = y;
+}
+
+void scroll(GLFWwindow* w, double x, double y)
+{
+	double dy;
+	dy = (x - y);
+	s += dy * 0.03f;
+	if (s < 0.03)
+		s = 0.03;
 }
