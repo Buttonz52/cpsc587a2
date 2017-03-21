@@ -3,11 +3,12 @@
 
 
 
-Spring::Spring(Particle *_a, Particle *_b)
+Spring::Spring(Particle *_a, Particle *_b, float r_len)
 {
 	a = _a;
 	b = _b;
-	len = (b->position - a->position).length();	
+	rest_len = r_len;	
+	len = length(b->position - a->position);
 	vertexArray = 0;
 	vertexBuffer = 0;
 	program = generateProgram("general.vert", "general.frag");

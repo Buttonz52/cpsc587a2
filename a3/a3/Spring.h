@@ -3,12 +3,13 @@
 class Spring
 {
 public:
-	Spring(Particle *a, Particle *b);
+	Spring(Particle *a, Particle *b, float r_len);
 
 	Particle *a;						//Particle a
 	Particle *b;						//Particle b
-	float len;						//Spring length
-	float stiffness = 40.0;		//Spring Stiffness
+	float len;							//Spring length
+	float rest_len;						//Spring rest length
+	float stiffness = 60.0;				//Spring Stiffness
 	float dampening = 100.0;			//Spring Dampening	
 	vector<vec3> verts;
 

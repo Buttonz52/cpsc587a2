@@ -3,6 +3,8 @@
 
 Particle::Particle(vec3 pos, float m, bool anchored)
 {
+	force = vec3(0);
+	velocity = vec3(0);
 	position = pos;
 	mass = m;
 	vertexArray = 0;

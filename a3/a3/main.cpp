@@ -59,6 +59,9 @@ int main()
 		//time step
 		curr_t += delta_t;
 
+		//v-sync
+		glfwSwapInterval(1);
+
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}
@@ -74,25 +77,25 @@ void setupScene()
 {
 	if (scene == 1)
 	{
-		Particle* p1 = new Particle(vec3(0, 0, 0), 200.0, true);
-		Particle* p2 = new Particle(vec3(0, -0.5, 0), 200.0, false);
+		Particle* p1 = new Particle(vec3(0, 0, 0), 1.0, true);
+		Particle* p2 = new Particle(vec3(0.2, -0.2, 0), 1.0, false);
 		particles.push_back(p1);
 		particles.push_back(p2);
 
-		Spring* s1 = new Spring(p1, p2);
+		Spring* s1 = new Spring(p1, p2, 0.1);
 		springs.push_back(s1);
 	}
 	if (scene == 2)
 	{
-		Particle* p1 = new Particle(vec3(0, 0.5, 0), 200.0, true);
-		Particle* p2 = new Particle(vec3(0.1, 0.2, 0), 200.0, false);
-		Particle* p3 = new Particle(vec3(-0.5, -0.5, 0), 200.0, false);
+		Particle* p1 = new Particle(vec3(0, 0.5, 0), 0.5, true);
+		Particle* p2 = new Particle(vec3(0, 0.3, 0), 0.5, false);
+		Particle* p3 = new Particle(vec3(0, 0.1, 0), 0.5, false);
 		particles.push_back(p1);
 		particles.push_back(p2);
 		particles.push_back(p3);
 
-		Spring* s1 = new Spring(p1, p2);
-		Spring* s2 = new Spring(p2, p3);
+		Spring* s1 = new Spring(p1, p2, 0.1);
+		Spring* s2 = new Spring(p2, p3, 0.1);
 		springs.push_back(s1);
 		springs.push_back(s2);
 	}
@@ -109,23 +112,33 @@ void simulate()
 	{
 		float k = springs[i]->stiffness;
 		float b = springs[i]->dampening;
-		vec3 xi = springs[i]->a->position;
-		vec3 xi1 = springs[i]->b->position;
+		float x = length(springs[i]->b->position - springs[i]->a->position);
+		float xr = springs[i]->rest_len;
+		vec3 dir = -normalize(springs[i]->b->position - springs[i]->a->position);
 		vec3 vi = springs[i]->a->velocity;
 		vec3 vi1 = springs[i]->b->velocity;
-		vec3 f = -k * (xi - xi1) -b * (vi - vi1) + GRAVITY;
+		vec3 f = -k * (x - xr)*dir - b * (vi - vi1);			//spring force and dampening force
 
-		springs[i]->a->force = f;
-		springs[i]->b->force = -f;
+		springs[i]->a->force += f;
+		springs[i]->b->force += -f;
+
+		cout << "x: " << springs[i]->b->force.x << endl;
+		cout << "y: " << springs[i]->b->force.y << endl;
+		cout << "z: " << springs[i]->b->force.z << endl;
+
 	}
 		
-	//for each particle move the particle appropriatly
+	//for each particle move the particle appropriatly and remove its force
 	for (int i = 0; i < particles.size(); i++)
 	{
 		if (!particles[i]->isAnchored)
 		{
+			particles[i]->force += GRAVITY*particles[i]->mass;			//force of gravity
 			particles[i]->velocity += delta_t*(particles[i]->force) / (particles[i]->mass);
 			particles[i]->position += particles[i]->velocity;
+			particles[i]->force = vec3(0, 0, 0);
+		}
+		else {
 			particles[i]->force = vec3(0, 0, 0);
 		}
 	}	
