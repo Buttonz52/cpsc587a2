@@ -78,7 +78,7 @@ void setupScene()
 	if (scene == 1)
 	{
 		Particle* p1 = new Particle(vec3(0, 0, 0), 1.0, true);
-		Particle* p2 = new Particle(vec3(0.2, -0.2, 0), 1.0, false);
+		Particle* p2 = new Particle(vec3(0, -0.01, 0), 1.0, false);
 		particles.push_back(p1);
 		particles.push_back(p2);
 
@@ -88,8 +88,8 @@ void setupScene()
 	if (scene == 2)
 	{
 		Particle* p1 = new Particle(vec3(0, 0.5, 0), 0.5, true);
-		Particle* p2 = new Particle(vec3(0, 0.3, 0), 0.5, false);
-		Particle* p3 = new Particle(vec3(0, 0.1, 0), 0.5, false);
+		Particle* p2 = new Particle(vec3(0.2, 0.5, 0), 0.5, false);
+		Particle* p3 = new Particle(vec3(0.4, 0.5, 0), 0.5, false);
 		particles.push_back(p1);
 		particles.push_back(p2);
 		particles.push_back(p3);
@@ -99,7 +99,27 @@ void setupScene()
 		springs.push_back(s1);
 		springs.push_back(s2);
 	}
+	if (scene == 3)
+	{
+		for (int i = 0; i < cubeSize; i++)
+		{
+			for (int j = 0; j < cubeSize; j++)
+			{
+				for (int k = 0; k < cubeSize; k++)
+				{
+					Particle* p = new Particle(vec3(i*d, j*d, k*d), 0.5, true);
+					particles.push_back(p);
+				}
+			}
+		}
 
+		connectSprings3();
+
+	}
+	if (scene == 4)
+	{
+
+	}
 }
 
 void simulate()
@@ -121,11 +141,6 @@ void simulate()
 
 		springs[i]->a->force += f;
 		springs[i]->b->force += -f;
-
-		cout << "x: " << springs[i]->b->force.x << endl;
-		cout << "y: " << springs[i]->b->force.y << endl;
-		cout << "z: " << springs[i]->b->force.z << endl;
-
 	}
 		
 	//for each particle move the particle appropriatly and remove its force
@@ -143,6 +158,23 @@ void simulate()
 		}
 	}	
 	curr_t += delta_t;
+}
+
+void connectSprings3()
+{
+	float c = sqrt(d*d + d*d);
+	float r = sqrt(d*d + c*c);
+
+	for (int i = 0; i < particles.size(); i++)
+	{
+		for (int j = 0; j < particles.size(); j++)
+		{
+			Particle* x1 = particles[i];
+			Particle* x2 = particles[j];
+
+			//continue here ----------------------------------------------------------------------------------
+		}
+	}
 }
 
 void printOpenGLVersion()

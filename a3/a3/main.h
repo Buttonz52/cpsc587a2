@@ -22,10 +22,12 @@ using namespace std;
 
 //Scene
 int scene = 2;				// Scenes 1,2,3,4
+int cubeSize = 3;			// number of layers for scene 3
+float d = 0.1;				// distance between springs for scene 3
 
 //Simulation
 float delta_t = 0.0001;
-float curr_t = 0.00;
+float curr_t = 0.0;
 vector<Particle*> particles;
 vector<Spring*> springs;
 
