@@ -10,9 +10,9 @@
 #include <vector>
 
 #define PI 3.14159265359f
-#define GRAVITY vec3(0.f, -9.81/2, 0.f)
-#define cx 2
-#define cy 2
+#define GRAVITY vec3(0.f, -9.81, 0.f)
+#define cx 16
+#define cy 16
 
 #define defaultZoom 8.f
 
@@ -36,11 +36,11 @@ float d1 = 0.3;
 
 int cloth_x = cx;
 int cloth_y = cy;
-float d2 = 0.02;
+float d2 = 0.05;
 Particle* parts[cx][cy];
 
 //Simulation
-float delta_t = 0.0001;
+float delta_t = 0.000005;
 float curr_t = 0.0;
 vector<Particle*> particles;
 vector<Spring*> springs;
