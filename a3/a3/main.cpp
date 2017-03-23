@@ -53,8 +53,8 @@ int main()
 			springs[i]->update();
 
 		//draw objects
-		for (int i = 0; i < particles.size(); i++)
-			particles[i]->render();
+		//for (int i = 0; i < particles.size(); i++)
+			//particles[i]->render();
 
 		for (int i = 0; i < springs.size(); i++)
 			springs[i]->render();
@@ -110,7 +110,7 @@ void setupScene()
 			{
 				for (int k = 0; k < cubeSize; k++)
 				{
-					Particle* p = new Particle(vec3(i*d, j*d, k*d), 1, false);
+					Particle* p = new Particle(vec3(i*d1, j*d1, k*d1), 1, false);
 					particles.push_back(p);
 				}
 			}
@@ -119,7 +119,17 @@ void setupScene()
 	}
 	if (scene == 4)
 	{
-
+		for (int i = 0; i < cloth_x; i++)
+		{
+			for (int j = 0; j < cloth_y; j++)
+			{
+				Particle* p = new Particle(vec3(i*d2 - 0.5, j*d2 + 0.3, 0), 1, false);
+				particles.push_back(p);
+			}
+		}
+		particles[0]->isAnchored = true;
+		
+		connectSprings4();
 	}
 }
 
@@ -167,8 +177,8 @@ void simulate()
 
 void connectSprings3()
 {
-	float c = sqrt(d*d + d*d);
-	float r = sqrt(d*d + c*c);
+	float c = sqrt(d1*d1 + d1*d1);
+	float r = sqrt(d1*d1 + c*c);
 
 	for (int i = 0; i < particles.size(); i++)
 	{
@@ -186,6 +196,183 @@ void connectSprings3()
 		}
 	}
 }
+void connectSprings4()
+{
+	for (int row = 0; row < cx; row++) {
+		for (int col = 0; col < cy; col++) {
+			parts[row][col] = particles.at(row);
+		}
+	}
+
+	for (int i = 0; i < cx; i++) {
+		for (int j = 0; j < cy; j++) {
+
+			Particle* x1 = parts[i][j];
+			if (i-1 >= 0 && i - 1 < cx)
+			{
+				Particle* x2 = parts[i-1][j];
+				float len = length(vec3(x2->position - x1->position));
+				Spring* s = new Spring(x1, x2, len, 3000, 200);
+				springs.push_back(s);
+			}
+			if (i + 1 >= 0 && i + 1 < cx)
+			{
+				Particle* x2 = parts[i + 1][j];
+				float len = length(vec3(x2->position - x1->position));
+				Spring* s = new Spring(x1, x2, len, 3000, 200);
+				springs.push_back(s);
+			}
+			if (j-1 >= 0 && j-1 < cy)
+			{
+				Particle* x2 = parts[i][j-1];
+				float len = length(vec3(x2->position - x1->position));
+				Spring* s = new Spring(x1, x2, len, 3000, 200);
+				springs.push_back(s);
+			}
+			if (j+1 >= 0 && j+1 < cy)
+			{
+				Particle* x2 = parts[i][j + 1];
+				float len = length(vec3(x2->position - x1->position));
+				Spring* s = new Spring(x1, x2, len, 3000, 200);
+				springs.push_back(s);
+			}
+		}
+	}
+	//float c = sqrt(d2*d2 + d2*d2);
+	//float r = sqrt(d2*d2 + c*c);
+
+	//for (int i = 0; i < particles.size(); i++)
+	//{
+	//	for (int j = i; j < particles.size(); j++)
+	//	{
+	//		Particle* x1 = particles[i];
+	//		Particle* x2 = particles[j];
+	//		float len = length(vec3(x2->position - x1->position));
+
+	//		if (!(x1 == x2) && len < r)
+	//		{
+	//			Spring* s = new Spring(x1, x2, len, 3000, 200);
+	//			springs.push_back(s);
+	//		}
+	//	}
+	//}
+
+	//for (int i = 0; i < particles.size(); i++)
+	//{
+	//	int l = i - 1;
+	//	int r = i + 1;
+	//	int u = i - cloth_x;
+	//	int d = i + cloth_x;
+	//	//int ul = i - cloth_x - 1;
+	//	//int ur = i - cloth_x + 1;
+	//	//int dl = i + cloth_x - 1;
+	//	//int dr = i + cloth_x + 1;
+	//	//int ll = i - 2;
+	//	//int uu = i - 2 * cloth_x;
+	//	//int rr = i + 2;
+	//	//int dd = i + 2 * cloth_x;	
+
+	//	if (l >= 0 && l < cloth_x*cloth_y)
+	//	{
+	//		Particle* x1 = particles[i];
+	//		Particle* x2 = particles[l];
+	//		float len = length(vec3(x2->position - x1->position));
+	//		Spring* s = new Spring(x1, x2, len, 3000, 200);
+	//		springs.push_back(s);
+	//	}
+	//	if (r >= 0 && r < cloth_x*cloth_y)
+	//	{
+	//		Particle* x1 = particles[i];
+	//		Particle* x2 = particles[r];
+	//		float len = length(vec3(x2->position - x1->position));
+	//		Spring* s = new Spring(x1, x2, len, 3000, 200);
+	//		springs.push_back(s);
+	//	}
+	//	if (u >= 0 && u < cloth_x*cloth_y)
+	//	{
+	//		Particle* x1 = particles[i];
+	//		Particle* x2 = particles[u];
+	//		float len = length(vec3(x2->position - x1->position));
+	//		Spring* s = new Spring(x1, x2, len, 3000, 200);
+	//		springs.push_back(s);
+	//	}
+	//	if (d >= 0 && d < cloth_x*cloth_y)
+	//	{
+	//		Particle* x1 = particles[i];
+	//		Particle* x2 = particles[d];
+	//		float len = length(vec3(x2->position - x1->position));
+	//		Spring* s = new Spring(x1, x2, len, 3000, 200);
+	//		springs.push_back(s);
+	//	}
+	/*	if (ul >= 0 && ul < cloth_x*cloth_y)
+		{
+			Particle* x1 = particles[i];
+			Particle* x2 = particles[ul];
+			float len = length(vec3(x2->position - x1->position));
+			Spring* s = new Spring(x1, x2, len, 3000, 200);
+			springs.push_back(s);
+		}
+		if (ur >= 0 && ur < cloth_x*cloth_y)
+		{
+			Particle* x1 = particles[i];
+			Particle* x2 = particles[ur];
+			float len = length(vec3(x2->position - x1->position));
+			Spring* s = new Spring(x1, x2, len, 3000, 200);
+			springs.push_back(s);
+		}
+		if (dl >= 0 && dl < cloth_x*cloth_y)
+		{
+			Particle* x1 = particles[i];
+			Particle* x2 = particles[dl];
+			float len = length(vec3(x2->position - x1->position));
+			Spring* s = new Spring(x1, x2, len, 3000, 200);
+			springs.push_back(s);
+		}
+		if (dr >= 0 && dr < cloth_x*cloth_y)
+		{
+			Particle* x1 = particles[i];
+			Particle* x2 = particles[dr];
+			float len = length(vec3(x2->position - x1->position));
+			Spring* s = new Spring(x1, x2, len, 3000, 200);
+			springs.push_back(s);
+		}
+		if (ll >= 0 && ll < cloth_x*cloth_y)
+		{
+			Particle* x1 = particles[i];
+			Particle* x2 = particles[ll];
+			float len = length(vec3(x2->position - x1->position));
+			Spring* s = new Spring(x1, x2, len, 3000, 200);
+			springs.push_back(s);
+		}
+		if (uu >= 0 && uu < cloth_x*cloth_y)
+		{
+			Particle* x1 = particles[i];
+			Particle* x2 = particles[uu];
+			float len = length(vec3(x2->position - x1->position));
+			Spring* s = new Spring(x1, x2, len, 3000, 200);
+			springs.push_back(s);
+		}
+		if (rr >= 0 && rr < cloth_x*cloth_y)
+		{
+			Particle* x1 = particles[i];
+			Particle* x2 = particles[rr];
+			float len = length(vec3(x2->position - x1->position));
+			Spring* s = new Spring(x1, x2, len, 3000, 200);
+			springs.push_back(s);
+		}
+		springs;
+		if (dd >= 0 && dd < cloth_x*cloth_y)
+		{
+			Particle* x1 = particles[i];
+			Particle* x2 = particles[dd];
+			float len = length(vec3(x2->position - x1->position));
+			Spring* s = new Spring(x1, x2, len, 3000, 200);
+			springs.push_back(s);
+		}*/
+
+}
+
+
 
 void printOpenGLVersion()
 {

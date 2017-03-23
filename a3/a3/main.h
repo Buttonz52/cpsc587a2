@@ -10,7 +10,9 @@
 #include <vector>
 
 #define PI 3.14159265359f
-#define GRAVITY vec3(0.f, -9.81, 0.f)
+#define GRAVITY vec3(0.f, -9.81/2, 0.f)
+#define cx 2
+#define cy 2
 
 #define defaultZoom 8.f
 
@@ -27,15 +29,22 @@ float phi = 0.0;			//radians
 float rotate_x = 0.0, rotate_y = 0.0;
 
 //Scene
-int scene = 3;				// Scenes 1,2,3,4
+int scene = 1;				// Scenes 1,2,3,4
+
 int cubeSize = 3;			// number of layers for scene 3
-float d = 0.3;
+float d1 = 0.3;
+
+int cloth_x = cx;
+int cloth_y = cy;
+float d2 = 0.02;
+Particle* parts[cx][cy];
 
 //Simulation
 float delta_t = 0.0001;
 float curr_t = 0.0;
 vector<Particle*> particles;
 vector<Spring*> springs;
+
 
 //functions
 void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
@@ -48,3 +57,4 @@ void printOpenGLVersion();
 void setupScene();
 void simulate();
 void connectSprings3();
+void connectSprings4();
