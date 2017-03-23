@@ -29,7 +29,7 @@ float rotate_x = 0.0, rotate_y = 0.0;
 //Scene
 int scene = 3;				// Scenes 1,2,3,4
 int cubeSize = 3;			// number of layers for scene 3
-float d = 0.1;				// distance between springs for scene 3
+float d = 0.3;
 
 //Simulation
 float delta_t = 0.0001;

@@ -3,12 +3,14 @@
 
 
 
-Spring::Spring(Particle *_a, Particle *_b, float r_len)
+Spring::Spring(Particle *_a, Particle *_b, float r_len, float k, float damp)
 {
 	a = _a;
 	b = _b;
 	rest_len = r_len;	
 	len = length(b->position - a->position);
+	stiffness = k;
+	dampening = damp;
 	vertexArray = 0;
 	vertexBuffer = 0;
 	program = generateProgram("general.vert", "general.frag");

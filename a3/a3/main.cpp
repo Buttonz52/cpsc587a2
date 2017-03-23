@@ -85,7 +85,7 @@ void setupScene()
 		particles.push_back(p1);
 		particles.push_back(p2);
 
-		Spring* s1 = new Spring(p1, p2, 0.1);
+		Spring* s1 = new Spring(p1, p2, 0.1, 60, 100);
 		springs.push_back(s1);
 	}
 	if (scene == 2)
@@ -97,8 +97,8 @@ void setupScene()
 		particles.push_back(p2);
 		particles.push_back(p3);
 
-		Spring* s1 = new Spring(p1, p2, 0.1);
-		Spring* s2 = new Spring(p2, p3, 0.1);
+		Spring* s1 = new Spring(p1, p2, 0.15, 60, 100);
+		Spring* s2 = new Spring(p2, p3, 0.15, 60, 100);
 		springs.push_back(s1);
 		springs.push_back(s2);
 	}
@@ -110,15 +110,12 @@ void setupScene()
 			{
 				for (int k = 0; k < cubeSize; k++)
 				{
-					Particle* p = new Particle(vec3(i*d, j*d, k*d), 0.5, false);
+					Particle* p = new Particle(vec3(i*d, j*d, k*d), 1, false);
 					particles.push_back(p);
 				}
 			}
 		}
-		//particles[0]->isAnchored = true;
-
 		connectSprings3();
-
 	}
 	if (scene == 4)
 	{
@@ -152,11 +149,12 @@ void simulate()
 	{
 		if (!particles[i]->isAnchored)
 		{
-			particles[i]->force += GRAVITY*particles[i]->mass;			//force of gravity
-			particles[i]->velocity += delta_t*(particles[i]->force) / (particles[i]->mass);
-			if(particles[i]->position.y > -0.5)
+			if (particles[i]->position.y > -0.5)
+			{
+				particles[i]->force += GRAVITY*particles[i]->mass;			//force of gravity
+				particles[i]->velocity += delta_t*(particles[i]->force) / (particles[i]->mass);
 				particles[i]->position += particles[i]->velocity;
-			else {}
+			}
 
 			particles[i]->force = vec3(0, 0, 0);
 		}
@@ -174,15 +172,15 @@ void connectSprings3()
 
 	for (int i = 0; i < particles.size(); i++)
 	{
-		for (int j = 0; j < particles.size(); j++)
+		for (int j = i; j < particles.size(); j++)
 		{
 			Particle* x1 = particles[i];
 			Particle* x2 = particles[j];
 			float len = length(vec3(x2->position - x1->position));
 
-			if (!(x1->position == x2->position) && len < r)
+			if (!(x1 == x2) && len < r)
 			{
-				Spring* s = new Spring(x1, x2, d);
+				Spring* s = new Spring(x1, x2, len, 3000, 200);
 				springs.push_back(s);
 			}
 		}
